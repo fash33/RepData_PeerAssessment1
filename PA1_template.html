@@ -143,6 +143,11 @@ qplot(stepsPerDay, xlab = &quot;Total Steps&quot;, ylab = &quot;Frequency&quot;,
 <h4>Mean and median number of steps taken each day</h4>
 <pre class="r"><code>meanStepsPerDay &lt;- mean(stepsPerDay)
 medianStepsPerDay &lt;- median(stepsPerDay)</code></pre>
+<ul>
+<li>Mean: 9354.2295</li>
+<li>Median: 10395</li>
+</ul>
+<hr />
 </div>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level2">
@@ -161,12 +166,19 @@ ylab(&quot;Average number of steps taken&quot;)</code></pre>
 <pre class="r"><code>average[which.max(average$steps),]</code></pre>
 <pre><code>##     interval    steps
 ## 104      835 206.1698</code></pre>
+<ul>
+<li>Most Steps at: 8:35</li>
+</ul>
+<hr />
 </div>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
 <p>Many days/intervals contain missing values. To impute missing values we first calculate the total number of missing values.</p>
 <pre class="r"><code>numMissingValues &lt;- length(which(is.na(data$steps)))</code></pre>
+<ul>
+<li>Number of missing values: 2304</li>
+</ul>
 <p>We then create a new dataset and fill in the missing values</p>
 <pre class="r"><code>activityDataImputed &lt;- data
 activityDataImputed$steps &lt;- sapply(data$steps, mean)
@@ -181,6 +193,11 @@ stepsByDayImputed &lt;- tapply(activityDataImputed$steps, activityDataImputed$da
 <h4>The mean and median total number of steps taken per day</h4>
 <pre class="r"><code>stepsByDayMeanImputed &lt;- mean(stepsByDayImputed, na.rm = TRUE)
 stepsByDayMedianImputed &lt;- median(stepsByDayImputed)</code></pre>
+<ul>
+<li>Mean (Imputed): 1.0766 × 10<sup>4</sup></li>
+<li>Median (Imputed): 1.0766 × 10<sup>4</sup></li>
+</ul>
+<hr />
 </div>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">

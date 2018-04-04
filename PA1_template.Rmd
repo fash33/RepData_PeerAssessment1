@@ -1,6 +1,5 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: md_document
 ---
 
 ```{r setoptions, echo=FALSE, warning = FALSE}
