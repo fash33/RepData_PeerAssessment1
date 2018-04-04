@@ -1,6 +1,6 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-
+output: md_document
 ---
 
 ```{r setoptions, echo=FALSE, warning = FALSE}
@@ -30,20 +30,25 @@ library(ggplot2)
 qplot(stepsPerDay, xlab = "Total Steps", ylab = "Frequency", binwidth = 500)
 ```
   
-  
+
 #### Mean and median number of steps taken each day  
 
 ```{r}
 meanStepsPerDay <- mean(stepsPerDay)
 medianStepsPerDay <- median(stepsPerDay)
 ```
+  
+* Mean: 9354.2295
+* Median:  10395
 
-## What is the average daily activity pattern?
+-----  
+
+## What is the average daily activity pattern?  
+
 ```{r}
 average <- aggregate(x=list(steps=data$steps),by=list(interval=data$interval), FUN = mean, na.rm = TRUE)
 
 ```
-  
   
 #### Time series plot of the average number of steps taken  
 
@@ -60,12 +65,23 @@ ylab("Average number of steps taken")
 ```{r}
 average[which.max(average$steps),]
 ```
-## Imputing missing values
+  
+* Most Steps at: 8:35
+
+----  
+
+## Imputing missing values  
+
 Many days/intervals contain missing values. To impute missing values we first calculate the total number of missing values. 
+
 ```{r}
 numMissingValues <- length(which(is.na(data$steps)))
 ```
-We then create a new dataset and fill in the missing values
+  
+* Number of missing values: 2304  
+
+We then create a new dataset and fill in the missing values  
+
 ```{r}
 
 activityDataImputed <- data
@@ -86,9 +102,17 @@ qplot(stepsByDayImputed, xlab='Total steps per day', ylab='Frequency', binwidth=
 stepsByDayMeanImputed <- mean(stepsByDayImputed, na.rm = TRUE)
 stepsByDayMedianImputed <- median(stepsByDayImputed)
 ```
+  
+* Mean (Imputed): 1.0766 &times; 10<sup>4</sup>
+* Median (Imputed):  1.0766 &times; 10<sup>4</sup>
 
-## Are there differences in activity patterns between weekdays and weekends?
-At first we create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
+
+----  
+
+## Are there differences in activity patterns between weekdays and weekends?  
+
+At first we create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.  
+
 ```{r}
 day <- function(date) {
   day <- weekdays(date)
